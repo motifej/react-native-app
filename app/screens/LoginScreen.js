@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { StackNavigator } from 'react-navigation';
+import LinearGradient from 'react-native-linear-gradient';
 import {
   Picker,
   StyleSheet,
