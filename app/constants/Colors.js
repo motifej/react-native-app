@@ -1,14 +1,20 @@
-const tintColor = '#2f95dc';
+export const gradientStart = '#fc5a14';
+export const gradientEnd = '#e70f62';
 
-export default {
-  tintColor,
-  tabIconDefault: '#ccc',
-  tabIconSelected: tintColor,
-  tabBar: '#fefefe',
-  errorBackground: 'red',
-  errorText: '#fff',
-  warningBackground: '#EAEB5E',
-  warningText: '#666804',
-  noticeBackground: tintColor,
-  noticeText: '#fff',
-};
+
+
+
+// const tintColor = '#2f95dc';
+//
+// export default {
+//   tintColor,
+//   tabIconDefault: '#ccc',
+//   tabIconSelected: tintColor,
+//   tabBar: '#fefefe',
+//   errorBackground: 'red',
+//   errorText: '#fff',
+//   warningBackground: '#EAEB5E',
+//   warningText: '#666804',
+//   noticeBackground: tintColor,
+//   noticeText: '#fff',
+// };

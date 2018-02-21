@@ -8,7 +8,9 @@ import {
   TextInput,
   Text,
   View,
+  Alert,
 } from 'react-native';
+import Header from '../components/Header';
 import { login } from '../actions/user';
 
 class LoginScreen extends React.Component {
@@ -24,12 +26,15 @@ class LoginScreen extends React.Component {
   render() {
     return (
       <View>
+        <Header
+          title="Sign in"
+          goBack={() => Alert('goBack')}
+        />
         <TextInput
           style={styles.input}
           value={this.state.phone}
           onChangeText={this._onChangeText}
           placeholder="Enter your phone"
-          autoFocus={true}
           autoCorrect={true}
           keyboardType="numeric"
           returnKeyType="next"
