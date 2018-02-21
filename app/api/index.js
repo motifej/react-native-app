@@ -16,7 +16,7 @@ export const registerCustomer = (phone) => Promise.resolve({
 });
 
 // export const loginCustomer = (phone, code) => client.post('/api/customers/v1/auth/login', { data: { phone, code } });
-export const loginCustomer = (phone, code) => Promise.resolve({
+export const loginCustomer = (phone, code) => console.log(phone, code, '<<<<') || Promise.resolve({
   'customer': '1',
   'expire': 1517913000,
   'token': 'YOUR_AUTHORIZATION_TOKEN',

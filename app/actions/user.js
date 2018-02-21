@@ -8,3 +8,11 @@ export const login = {
     fail: types.LOGIN.POST.FAIL,
   }),
 };
+
+export const confirmLogin = {
+  post: createRequestActions({
+    request: types.CONFIRM_LOGIN.POST.REQUEST,
+    success: types.CONFIRM_LOGIN.POST.SUCCESS,
+    fail: types.CONFIRM_LOGIN.POST.FAIL,
+  }),
+};

@@ -9,12 +9,12 @@ import {
   StatusBar,
 } from 'react-native';
 import Header from '../components/Header';
-import { login } from '../actions/user';
+import { confirmLogin } from '../actions/user';
 
 class LoginScreen extends React.Component {
 
   state = {
-    phone: '+7',
+    code: 'C-',
   };
 
   render() {
@@ -25,16 +25,16 @@ class LoginScreen extends React.Component {
         />
         <Header
           title="Sign in"
-          goBack={() => this.props.navigation.navigate('Home')}
+          goBack={() => this.props.navigation.navigate('Login')}
           goNext={this._submit}
           back="arrow-back"
-          next="Enter"
+          next="Next"
         />
         <TextInput
           style={styles.input}
-          value={this.state.phone}
+          value={this.state.code}
           onChangeText={this._onChangeText}
-          placeholder="Enter your phone"
+          placeholder="Enter code"
           autoCorrect={true}
           keyboardType="numeric"
           returnKeyType="next"
@@ -44,10 +44,10 @@ class LoginScreen extends React.Component {
     );
   }
 
-  _onChangeText = phone => this.setState({ phone });
+  _onChangeText = code => this.setState({ code });
 
   _submit = () => {
-    this.props.login(this.state.phone);
+    this.props.confirmLogin(this.state.code);
   };
 }
 
@@ -65,5 +65,5 @@ const styles = StyleSheet.create({
 });
 
 export default connect(null, {
-  login: login.post.request,
+  confirmLogin: confirmLogin.post.request,
 })(LoginScreen);
