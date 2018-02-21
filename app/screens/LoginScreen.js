@@ -6,6 +6,7 @@ import {
   TextInput,
   Text,
   View,
+  StatusBar,
 } from 'react-native';
 import Header from '../components/Header';
 import { login } from '../actions/user';
@@ -16,17 +17,17 @@ class LoginScreen extends React.Component {
     phone: '+7',
   };
 
-  componentDidMount() {
-    this.props.login(100);
-  }
-
   render() {
     return (
       <View>
+        <StatusBar
+          barStyle="light-content"
+        />
         <Header
           title="Sign in"
-          goBack={() => console.log('qwe')}
-          goNext={() => console.log('qwe')}
+          goBack={() => console.log('back')}
+          goNext={() => console.log('next')}
+          back="arrow-back"
           next="Enter"
         />
         <TextInput
@@ -44,10 +45,10 @@ class LoginScreen extends React.Component {
     );
   }
 
-  _onChangeText = phone => this.setState({phone});
+  _onChangeText = phone => console.log(phone) || this.setState({ phone });
 
   _submit = () => {
-    alert(`Phone ${this.state.phone}`);
+    this.props.login(this.state.phone);
   };
 }
 

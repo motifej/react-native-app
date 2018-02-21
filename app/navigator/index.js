@@ -5,6 +5,7 @@ import LoginScreen from '../screens/LoginScreen';
 const AppNavigator = new StackNavigator(
   {
     Login: { screen: LoginScreen },
+    Home: { screen: HomeScreen },
   },
   {
     headerMode: 'screen',

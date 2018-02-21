@@ -1,9 +1,11 @@
 import { takeEvery, put, call, select, fork } from 'redux-saga/effects';
 import { LOGIN } from '../constants/user';
 import { login } from '../actions/user';
+import { registerCustomer } from '../api';
 
-function* loginSaga({ payload }) {
-  console.log(payload);
+function* loginSaga({ payload: { data } }) {
+  yield call(registerCustomer, data);
+  // navigate to next screen
 }
 
 function* checkUserInStorage() {

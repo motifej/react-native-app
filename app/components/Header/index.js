@@ -5,7 +5,7 @@ import { gradientStart, gradientEnd } from '../../constants/Colors';
 import { OpenSansText } from '../StyledText';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 
-const Header = ({ title, goBack, goNext, next }) => (
+const Header = ({ title, goBack, goNext, back, next }) => (
   <LinearGradient
     colors={[gradientStart, gradientEnd]}
     style={styles.linearGradient}
@@ -15,7 +15,7 @@ const Header = ({ title, goBack, goNext, next }) => (
     <View style={styles.inner}>
       {goBack && <Text style={styles.backButton} onPress={ () => goBack() }>
         <MaterialIcon
-          name="arrow-back"
+          name={back}
           color="#fff"
           size={34}
         />
