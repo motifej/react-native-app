@@ -17,10 +17,6 @@ class LoginScreen extends React.Component {
     phone: '+7',
   };
 
-  componentDidMount() {
-    this.props.login(100);
-  }
-
   render() {
     return (
       <View>
@@ -43,10 +39,10 @@ class LoginScreen extends React.Component {
     );
   }
 
-  _onChangeText = phone => this.setState({phone});
+  _onChangeText = phone => console.log(phone) || this.setState({ phone });
 
   _submit = () => {
-    alert(`Phone ${this.state.phone}`);
+    this.props.login(this.state.phone);
   };
 }
 
