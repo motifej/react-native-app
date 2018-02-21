@@ -6,7 +6,6 @@ import {
   TextInput,
   Text,
   View,
-  Alert,
 } from 'react-native';
 import Header from '../components/Header';
 import { login } from '../actions/user';
@@ -26,7 +25,9 @@ class LoginScreen extends React.Component {
       <View>
         <Header
           title="Sign in"
-          goBack={() => Alert('goBack')}
+          goBack={() => console.log('qwe')}
+          goNext={() => console.log('qwe')}
+          next="Enter"
         />
         <TextInput
           style={styles.input}
