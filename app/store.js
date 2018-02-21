@@ -3,14 +3,20 @@ import createSagaMiddleware from 'redux-saga';
 import reducers from './reducers';
 import rootSaga from './sagas';
 import { createLogger } from 'redux-logger';
+import {
+  createReactNavigationReduxMiddleware,
+} from 'react-navigation-redux-helpers';
 
 export default function configureStore(history, initialState = {}) {
+  const navMiddleware = createReactNavigationReduxMiddleware("root", state => state.nav);
+
   const sagaMiddleware = createSagaMiddleware();
   const logger = createLogger({
     collapsed: true,
   });
 
   const middlewares = [
+    navMiddleware,
     sagaMiddleware,
     logger,
   ];
@@ -25,5 +31,5 @@ export default function configureStore(history, initialState = {}) {
 
   sagaMiddleware.run(rootSaga);
 
-  return { store };
+  return store;
 }

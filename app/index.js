@@ -1,28 +1,41 @@
 import React, { Component } from 'react';
-import { Platform, StatusBar, StyleSheet,Text, View } from 'react-native';
-import { NativeRouter, Redirect, Route } from 'react-router-native'
-import { Provider } from 'react-redux';
-import configureStore from './store';
-import HomeScreen from './screens/HomeScreen';
-import LoginScreen from './screens/LoginScreen';
+import { BackHandler } from 'react-native';
+import { NavigationActions, addNavigationHelpers } from 'react-navigation/src/react-navigation';
+import { connect } from 'react-redux';
+import { func, object } from 'prop-types';
+import AppNavigator from './navigator';
+import {
+  createReduxBoundAddListener,
+} from 'react-navigation-redux-helpers';
 
-export const { store } = configureStore();
+class App extends Component {
+  componentDidMount() {
+    this.backHandler = BackHandler.addEventListener('backPress', () => {
+      this.props.dispatch(NavigationActions.back());
+      return true;
+    });
+  }
 
-export default () => (
-  <Provider store={store}>
-    <NativeRouter>
-      <View style={styles.container}>
-        <Route exact path="/" component={HomeScreen}/>
-        <Redirect from="/" to="/login" />
-        <Route exact path="/login" component={LoginScreen}/>
-      </View>
-    </NativeRouter>
-  </Provider>
-);
+  componentWillUnmount() {
+    this.backHandler.remove();
+  }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-});
+  componentWillMount() {
+    this.addListener = createReduxBoundAddListener("root");
+  }
+
+  render() {
+    const { dispatch, nav } = this.props;
+    return <AppNavigator navigation={addNavigationHelpers({ dispatch, state: nav, addListener: this.addListener })} />;
+  }
+}
+
+App.propTypes = {
+  dispatch: func.isRequired,
+  nav: object.isRequired,
+};
+
+export default connect(
+  ({ nav }) => ({ nav }),
+  dispatch => ({ dispatch }),
+)(App);
