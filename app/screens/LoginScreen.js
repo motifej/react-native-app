@@ -8,13 +8,17 @@ import {
   View,
   StatusBar,
 } from 'react-native';
+import { errorMessageColor, gradientStart } from '../constants/Colors';
+import formatTextbyMask from '../utils/formatTextbyMask';
 import Header from '../components/Header';
+import FormatedInput from '../components/FormatedInput';
 import { login } from '../actions/user';
+import { PHONE_NUMBER_MASK } from '../constants';
 
 class LoginScreen extends React.Component {
 
   state = {
-    phone: '+7',
+    phone: null,
   };
 
   render() {
@@ -30,21 +34,18 @@ class LoginScreen extends React.Component {
           back="arrow-back"
           next="Enter"
         />
-        <TextInput
-          style={styles.input}
+        <FormatedInput
           value={this.state.phone}
           onChangeText={this._onChangeText}
-          placeholder="Enter your phone"
-          autoCorrect={true}
-          keyboardType="numeric"
-          returnKeyType="next"
-          blurOnSubmit={false}
         />
       </View>
+      
     );
   }
 
-  _onChangeText = phone => this.setState({ phone });
+  _onChangeText = val => this.setState({
+    phone: formatTextbyMask(val, PHONE_NUMBER_MASK)
+  });
 
   _submit = () => {
     this.props.login(this.state.phone);
@@ -52,15 +53,39 @@ class LoginScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  input: {
-    margin: 20,
-    marginBottom: 0,
-    height: 34,
-    paddingHorizontal: 10,
+  inputHolder: {
+    paddingVertical: 10,
+    marginTop: 5,
+    marginBottom: 5,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'relative',
     borderRadius: 4,
-    borderColor: '#ccc',
+    borderColor: gradientStart,
     borderWidth: 1,
+    height: 54,
+  },
+  form: {
+    margin: 20,
+  },
+  countryCode: {
+    fontSize: 26,
+    color: '#242424',
+    marginLeft: 10,
+    flex: 0,
+  },
+  errorMessage: {
+    color: errorMessageColor,
     fontSize: 16,
+  },
+  input: {
+    height: 54,
+    color: '#242424',
+    flex: 2,
+    fontSize: 26,
+    borderRadius: 4,
+    paddingHorizontal: 10,
   },
 });
 

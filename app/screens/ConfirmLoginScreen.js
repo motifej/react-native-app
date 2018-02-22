@@ -8,13 +8,16 @@ import {
   View,
   StatusBar,
 } from 'react-native';
+import formatTextbyMask from '../utils/formatTextbyMask';
+import FormatedInput from '../components/FormatedInput';
 import Header from '../components/Header';
+import { CONFIRM_CODE_MASK } from '../constants';
 import { confirmLogin } from '../actions/user';
 
 class LoginScreen extends React.Component {
 
   state = {
-    code: 'C-',
+    code: '',
   };
 
   render() {
@@ -30,21 +33,19 @@ class LoginScreen extends React.Component {
           back="arrow-back"
           next="Next"
         />
-        <TextInput
-          style={styles.input}
+        <FormatedInput
           value={this.state.code}
-          onChangeText={this._onChangeText}
           placeholder="Enter code"
-          autoCorrect={true}
-          keyboardType="numeric"
-          returnKeyType="next"
-          blurOnSubmit={false}
+          inputPrefix=" C-"
+          onChangeText={this._onChangeText}
         />
       </View>
     );
   }
 
-  _onChangeText = code => this.setState({ code });
+  _onChangeText = val => this.setState({
+    code: formatTextbyMask(val, CONFIRM_CODE_MASK)
+  });
 
   _submit = () => {
     this.props.confirmLogin(this.state.code);

@@ -1,5 +1,6 @@
 export const gradientStart = '#fc5a14';
 export const gradientEnd = '#e70f62';
+export const errorMessageColor = '#D80507';
 
 
 
