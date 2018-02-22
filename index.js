@@ -6,6 +6,8 @@ import App from './app/index.js';
 
 const store = configureStore();
 
+console.disableYellowBox = true;
+
 const Cryptoticketswallet = () => (
   <Provider store={store}>
     <App />
